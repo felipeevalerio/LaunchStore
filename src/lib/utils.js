@@ -15,3 +15,9 @@ exports.date = function(timestamp){
         format:`${day}/${month}/${year}`
     }
 }
+exports.formatBRL = function(price){
+    return new Intl.NumberFormat('pt-BR',{
+        style:"currency",
+        currency:"BRL"
+    }).format(price / 100)
+}
