@@ -41,6 +41,7 @@
             name="price"
             placeholder="Preço do produto"
             value="{{product.price}}"
+            onkeydown="Mask.apply(this,'formatBRL')"
             required>
             {# Faremos uma máscara de dinheiro/reais #}
     </div>
