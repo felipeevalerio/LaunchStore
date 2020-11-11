@@ -31,6 +31,20 @@
     </div>
 </div>
 
+<div class="item">
+    <div>Fotos</div>
+    <div id="photos-upload">
+        <input 
+            id="photos-input"
+            type="file" 
+            name="photos" 
+            multiple
+            onchange="photosUpload.handleFileInput(event)"
+            accept="image/*">
+        <p>Selecione Até 6 Fotos</p>
+    </div>
+    <div id="photos-preview"></div>
+</div>
 {#CAMPO DE FOTO #}
 
 <div class="item">
