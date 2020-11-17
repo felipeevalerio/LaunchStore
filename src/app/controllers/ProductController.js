@@ -1,5 +1,7 @@
 const Category = require('../models/Category')
 const Product = require('../models/Product')
+const File = require('../models/File')
+
 const {formatBRL} = require('../../lib/utils')
 module.exports = {
     async create(req,res){
@@ -19,8 +21,18 @@ module.exports = {
     },
     async post(req,res){
         
+
+        if(req.files.length == 0)
+            return res.send('Please,select at least one image')
+
+
         let results = await Product.create(req.body)
         const productId = results.rows[0].id
+
+
+        req.files.forEach(files => {
+            await File.create({...file,product_id:productId})
+        })
 
         return res.redirect(`/products/${productId}`)
 
