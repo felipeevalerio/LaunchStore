@@ -30,9 +30,11 @@ module.exports = {
         const productId = results.rows[0].id
 
 
-        req.files.forEach(files => {
-            await File.create({...file,product_id:productId})
+        const filesPromise = req.files.map(files => {
+            File.create({...files,product_id:productId})
         })
+
+        await Promise.all(filesPromise)
 
         return res.redirect(`/products/${productId}`)
 
@@ -48,7 +50,16 @@ module.exports = {
         results = await Category.all()
         const categories = results.rows
 
-        return res.render('products/edit.njk',{product,categories})
+        results = await Product.files(product.id)
+        
+        let files = results.rows
+        files = files.map(file => ({
+            ...file,
+            src:`${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
+        }))
+
+
+        return res.render('products/edit.njk',{product,categories,files})
     },
     async put(req,res){
         req.body.price = req.body.price.replace(/\D/g,"")
