@@ -331,11 +331,85 @@ form .item #photos-preview .photo:hover i{
 
 .product_single .gallery{
     width: 100%;
+
 }
 
-.product_single .gallery img{
-    width: 100% ;
+.product_single .highlight > img{
+    width: 100%;
+    height: 280px;
+    object-fit: none;
+    object-position: 50% 50%;
+    border: 1px solid #efefef;
+    cursor: zoom-in;
 }
+
+.product_single .gallery_preview{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 2px;
+}
+
+.product_single .gallery_preview img{
+    height: 100px;
+    width: 100%;
+
+    object-fit: cover;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.product_single .gallery_preview img:hover,
+.product_single .gallery_preview img.active{
+    opacity: 1;
+    transition: 200ms;
+}
+
+/* LIGHT BOX */
+
+.product_single .highlight .lightbox_target{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.7);
+
+    overflow: hidden;
+    z-index: 100;
+    top: -100%;
+    opacity: 0;
+    left: 0;
+
+    transition: opacity 400ms ;
+}
+
+.product_single .highlight .lightbox_target img{
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    box-shadow: 0 0 8px rgba(0,0,0,.3);
+    width: 90%;
+    height: 90%;
+
+    object-fit: contain;
+}
+
+.product_single .highlight a.lightbox_close{
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top:-80px;
+    transition: 400ms;
+}
+
+
 
 /*PRODUCT SINGLE INFO */
 
@@ -392,3 +466,5 @@ form .item #photos-preview .photo:hover i{
     font-size: 14px;
     letter-spacing: 0.4px;
 }
+
+/* product gallery */

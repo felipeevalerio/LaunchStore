@@ -117,6 +117,15 @@ module.exports = {
 
         product.old_price = formatBRL(product.old_price)
         product.price = formatBRL(product.price)
-        res.render('products/show',{product})
+
+        results = await Product.files(product.id)
+        const files = results.rows.map(file => ({
+            ...file,
+            src:`${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
+        }))
+
+
+
+        res.render('products/show',{product,files})
     }
 }
