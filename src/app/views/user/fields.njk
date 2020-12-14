@@ -1,0 +1,91 @@
+<div class="item">
+    <div>Nome Completo</div>
+    <div class="input">
+        <input 
+            type="text"
+            name="name"
+            placeholder="Digite seu nome completo"
+            value="{{user.name}}"
+            required>
+    </div>
+
+</div>
+
+<div class="item">
+    <div>Email</div>
+    <div class="input">
+        <input 
+            type="email"
+            name="email"
+            placeholder="Digite seu email"
+            value="{{user.email}}"
+            required>
+    </div>
+
+</div>
+
+<div class="item">
+    <div>Senha</div>
+    <div class="input">
+        <input 
+            type="password"
+            name="password"
+            placeholder="Escolha uma senha segura"
+            value="{{user.password}}"
+            required>
+    </div>
+
+</div>
+
+{% if not user.id %}
+
+<div class="item">
+    <div>Confirme sua Senha</div>
+    <div class="input">
+        <input 
+            type="password"
+            name="passwordRepeat"
+            placeholder="Confirme sua senha"
+            required>
+    </div>
+
+</div>
+
+{% endif %}
+
+
+<div class="item">
+    <div>CPF ou CNPJ</div>
+    <div class="input">
+        <input 
+            type="text"
+            name="cpf_cnpj"
+            placeholder="Digite seu documento"
+            value="{{user.cpf_cnpj}}"
+            required>
+    </div>
+</div>
+
+<div class="item">
+    <div>CEP</div>
+    <div class="input">
+        <input 
+            type="text"
+            name="cep"
+            placeholder="99999-999"
+            value="{{user.cep}}"
+            required>
+    </div>
+</div>
+
+<div class="item">
+    <div>Endereço Completo</div>
+    <div class="input">
+        <input 
+            type="text"
+            name="address"
+            placeholder="Rua Rio Grande do Sul,974,Bairro Centro"
+            value="{{user.addres}}"
+            required>
+    </div>
+</div>
