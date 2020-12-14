@@ -198,3 +198,78 @@ const LightBox = {
         LightBox.closeButton.style.top = "-80px"
     }
 }
+
+const Validate = {
+    apply(input,func){
+
+        Validate.clearErrors(input)
+
+        let results = Validate[func](input.value)
+        input.value = results.value
+
+        if(results.error) Validate.displayError(input,results.error)
+
+    },
+    displayError(input,error){
+        const div = document.createElement("div")
+        div.classList.add("error")
+        div.innerHTML = error
+        input.parentNode.appendChild(div)
+
+    },
+    clearErrors(input){
+        const errorDiv = input.parentNode.querySelector('.error')
+        if(errorDiv)
+            errorDiv.remove()
+        
+    },
+    isEmail(value){
+        let error = null
+        /*
+            // => Começar uma Regular Expression
+            ^ => Inicio da expressão
+            \w=> Escrita sem caracteres especiais
+            + => 1 ou mais
+            ([]) => Conjunto
+        */  
+        const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+
+        if(!value.match(mailFormat))
+            error = "Email Inválido"
+
+        return {
+            error,
+            value
+        }
+    },
+    isCpfCnpj(value){
+        let error = null
+
+        const cleanValues = value.replace(/\D/g,"")
+
+        if(cleanValues.length > 11 && cleanValues.length !== 14){
+            error = "CNPJ Incorreto"
+        }
+        else if(cleanValues.length < 12 && cleanValues.length !== 11){
+            error = "CPF Incorreto"
+        }
+
+        return {
+            error,
+            value
+        }
+    },
+    isCep(value){
+        let error = null
+
+        const cleanValues = value.replace(/\D/g,"")
+        if(cleanValues.length !== 8){
+            error = "CEP Inválido"
+        }
+
+        return {
+            error,
+            value
+        }
+    }
+}
