@@ -22,4 +22,8 @@ routes.get("/register",(req,res)=>{
     return res.redirect('/users/register')
 })
 
+routes.get("/accounts",(req,res)=>{
+    return res.redirect('/users/register')
+})
+
 module.exports = routes //Exportar a constante "Routes"
