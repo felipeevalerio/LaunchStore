@@ -5,6 +5,7 @@ const homeController = require("../app/controllers/homeController")
 
 const products = require("./products")
 const users = require("./users")
+const {isLoggedRedirectToUsers} = require("../app/middlewares/session")
 
 
 routes.get("/",homeController.index)
@@ -22,7 +23,7 @@ routes.get("/register",(req,res)=>{
     return res.redirect('/users/register')
 })
 
-routes.get("/accounts",(req,res)=>{
+routes.get("/accounts",isLoggedRedirectToUsers,(req,res)=>{
     return res.redirect('/users/login')
 })
 
