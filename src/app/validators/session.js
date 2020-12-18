@@ -23,36 +23,23 @@ async function login(req,res,next){
 
     next()
 }
-async function post(req,res,next){
 
-    const fillAllFields = checkAllFields(req.body)
-
-    if(fillAllFields){
-        return res.render("user/register",fillAllFields)
-    }
-
-    let {email,cpf_cnpj,password,passwordRepeat} = req.body
-
-    cpf_cnpj = cpf_cnpj.replace(/\D/g,"")
-
-    const user = await User.findOne({
-        where:{email},
-        or:{cpf_cnpj}
-    })
+async function forgot(req,res,next){
+    const {email} = req.body
+    let user = await User.findOne({where:{email}})
     
-    if(user) return res.render("user/register",{
-        user:req.body,
-        error:"Usuário já cadastrado."
-    })
-    
-    if(password !== passwordRepeat) return res.render("user/register",{
-        user:req.body,
-        error:"As senhas não coincidem"
-    })
+    if(!user)
+        return res.render("session/forgot-password",{
+            user:req.body,
+            error:"Usuário não cadastrado"
+        })
 
+
+    req.user = user
     next()
 }
 
 module.exports = {
-    login
+    login,
+    forgot
 }
