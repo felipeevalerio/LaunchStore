@@ -63,6 +63,8 @@ FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
 
 
+
+--SESSION 
 CREATE TABLE "session" (
   "sid" varchar NOT NULL COLLATE "default",
   "sess" json NOT NULL,
@@ -70,3 +72,19 @@ CREATE TABLE "session" (
 )
 WITH (OIDS=FALSE);
 ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE; 
+
+
+--EFEITO CASCADE when delete user and products
+ALTER TABLE "products"
+DROP CONSTRAINT products_user_id_fkey,
+ADD CONSTRAINT products_user_id_fkey
+FOREIGN KEY ("user_id")
+REFERENCES "users" ("id")
+ON DELETE CASCADE;
+
+ALTER TABLE "files"
+DROP CONSTRAINT files_product_id_fkey,
+ADD CONSTRAINT files_product_id_fkey
+FOREIGN KEY ("product_id")
+REFERENCES "products" ("id")
+ON DELETE CASCADE;
