@@ -1,3 +1,6 @@
+DROP DATABASE IF EXISTS Launchstore
+CREATE DATABASE Launchstore
+
 CREATE TABLE "products" (
   "id" SERIAL PRIMARY KEY,
   "category_id" int NOT NULL ,
