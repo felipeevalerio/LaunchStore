@@ -67,7 +67,7 @@ module.exports = {
                 address
             })
 
-            return res.render("session/login",{
+            return res.render("user/index",{
                 sucess:"Conta atualizada com sucesso",
                 user:req.body
             })

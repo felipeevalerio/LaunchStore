@@ -71,6 +71,7 @@ const Base = {
                 ${update.join(",")}
                 WHERE id = ${id}`
 
+            console.log(query)
             return db.query(query)
         }
         catch(err){
