@@ -5,6 +5,7 @@ const User = require("../models/User")
 
 const {formatCep,formatCpfCnpj} = require("../../lib/utils")
 const Product = require("../models/Product")
+const { files } = require("../models/Product")
 
 module.exports = {
     registerForm(req,res){
@@ -66,7 +67,7 @@ module.exports = {
                 address
             })
 
-            return res.render("user/index",{
+            return res.render("session/login",{
                 sucess:"Conta atualizada com sucesso",
                 user:req.body
             })
@@ -78,7 +79,7 @@ module.exports = {
             })
         }
     },
-    async delete(id){
+    async delete(req,res){
         try {
             //Pegar todos os produtos
             const products = await Product.findAll({where:{user_id:req.body.id}})
@@ -93,8 +94,8 @@ module.exports = {
             await User.delete(req.body.id)
             req.session.destroy()
             //Remover as imagens da pasta public
-            promiseResults.map(results =>{
-                results.rows.map(file => {
+            promiseResults.map(files =>{
+                files.map(file => {
                     try{
                         unlinkSync(file.path)
                     }catch(err){

@@ -5,15 +5,14 @@ function find(filters,table){
 
     if(filters){
         Object.keys(filters).map(key =>{
-            query += `${key}`
-
+            query += ` ${key}`
+            
             Object.keys(filters[key]).map(field =>{
-                query += `${field} = ${filters[key[field]]}`
+                query += ` ${field} = '${filters[key][field]}'`
             })
         })
-
     }
-    
+
     return db.query(query)
 }
 
@@ -26,7 +25,7 @@ const Base = {
         return this
     },
     async find(id){
-        const results = await find({where:{id}},this.table)
+        const results = await find({WHERE:{id}},this.table)
         return results.rows[0]  
     },
     async findOne(filters){
@@ -53,7 +52,6 @@ const Base = {
             
             const results = await db.query(query)
             return results.rows[0].id
-
         }
         catch(err){
             console.error(err)
