@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     padding: 16px;
-    position: absolute;
+    position: fixed;
     width: 100%;
     color: white;
     top: 0;

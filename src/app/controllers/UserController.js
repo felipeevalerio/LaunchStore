@@ -5,7 +5,7 @@ const User = require("../models/User")
 
 const {formatCep,formatCpfCnpj} = require("../../lib/utils")
 const Product = require("../models/Product")
-const { files } = require("../models/Product")
+const LoadService = require("../services/LoadProductService")
 
 module.exports = {
     registerForm(req,res){
@@ -113,6 +113,19 @@ module.exports = {
                 user:req.body,
                 error:"Erro ao deletar sua conta!"
             })
+        }
+    },
+    async ads(req,res){
+        try {
+            const products = await LoadService.load("products",{
+                where:{user_id:req.session.userId}}
+            )
+
+            return res.render("user/ads",{products})
+
+
+        } catch (err) {
+            console.error(err)
         }
     }
 

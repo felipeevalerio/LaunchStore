@@ -19,11 +19,6 @@ module.exports = {
     },
     async post(req,res){
         try{
-
-            if(req.files.length == 0)
-                return res.send('Please,select at least one image')
-
-
             let {category_id,name,description,old_price,price,
             quantity,status} = req.body
 

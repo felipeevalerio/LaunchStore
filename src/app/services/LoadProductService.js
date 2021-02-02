@@ -29,7 +29,6 @@ async function format(product){
     return product
 }
 
-
 const LoadService = {
     load(service,filter){
         this.filter = filter
