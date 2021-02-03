@@ -8,19 +8,21 @@
         {% for product in products %}
             <div class="item">
                 <div class="image" 
-                    style="background-image:url({{product.img}})">
+                    style="background-image:url('{{product.img}}')">
                 </div>
 
                 <div class="info">
                     <div class="title">{{product.name}}</div>
                     <div class="price">{{product.formatedPrice}}</div>
                     <div class="published">Publicado em {{product.formatedCreatedAt}}</div>
+
+                    
+                    <div class="actions">
+                        <a href="/products/{{product.id}}/edit">Editar</a>
+                        <a href="/products/{{product.id}}">Ver</a>
+                    </div>
                 </div>
 
-                <div class="actions">
-                    <a href="/products/{{product.id}}/edit">Editar</a>
-                    <a href="/products/{{product.id}}">Ver</a>
-                </div>
 
             </div>
         {% endfor %}
