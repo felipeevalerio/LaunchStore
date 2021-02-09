@@ -28,9 +28,6 @@ module.exports = {
 
             const buyer = await User.findOne({where:{id:req.session.userId}})
 
-
-            if(buyer.email == seller.email) return res.redirect(`products/${product.id}`)
-
             await mailer.sendMail({
                 to:seller,
                 from:"no-reply@launchstore.com.br",
